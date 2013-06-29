@@ -460,8 +460,8 @@ SectionVerb
 	DisableSequence
 		'MultiMedia4 Mixer SLIM_0_TX':1:1
 	EndSequence
-	CapturePCM  9
-	PlaybackPCM  9
+	CapturePCM  36
+	PlaybackPCM  36
 EndSection
 
 }
@@ -548,7 +548,7 @@ SectionVerb
 	Name "Voice CallBT SCO WB Tx"
 
 	EnableSequence
-		'Internal BTSCO SampleRate':0:8000
+		'Internal BTSCO SampleRate':0:16000
 		'Voice Stub Tx Mixer AUX_PCM_UL_TX':1:1
 		'SLIMBUS_1_RX Mixer Voice Stub':1:1
 		'Voice Stub Tx Mixer SLIM_1_TX':1:1
@@ -633,7 +633,7 @@ SectionVerb
 	EndSequence
 
 	DisableSequence
-		'Internal BTSCO SampleRate':0:8000
+		'Internal BTSCO SampleRate':0:16000
 		'AUX_PCM_RX_Voice Mixer Voip':1:0
 		'Voip_Tx Mixer AUX_PCM_TX_Voip':1:0
 	EndSequence
@@ -645,7 +645,7 @@ SectionVerb
 	Name "Voice Call IPBT SCO WB Tx"
 
 	EnableSequence
-		'Internal BTSCO SampleRate':0:8000
+		'Internal BTSCO SampleRate':0:16000
 		'AUX_PCM_RX_Voice Mixer Voip':1:1
 		'Voip_Tx Mixer AUX_PCM_TX_Voip':1:1
 	EndSequence
@@ -865,6 +865,20 @@ SectionVerb
 	PlaybackPCM  36
 EndSection
 
+SectionVerb
+	Name "HiFi TunnelPROXY Rx"
+
+	EnableSequence
+		'AFE_PCM_RX Audio Mixer MultiMedia4':1:1
+	EndSequence
+
+	DisableSequence
+		'AFE_PCM_RX Audio Mixer MultiMedia4':1:0
+	EndSequence
+	CapturePCM 0
+	PlaybackPCM 36
+EndSection
+
 # HTC additional verbs
 SectionVerb
 	Name "HiFi TunnelSpeaker"
@@ -881,7 +895,6 @@ SectionVerb
 EndSection
 }
 SectionUseCase."HiFi Lowlatency Rec" {
-# Unused by HTC
 SectionVerb
 	Name "HiFi Lowlatency Rec"
 
@@ -892,24 +905,140 @@ SectionVerb
 	DisableSequence
 		'MultiMedia5 Mixer SLIM_0_TX':1:0
 	EndSequence
-	CapturePCM  14
-	PlaybackPCM  14
+	CapturePCM  40
+	PlaybackPCM  40
+EndSection
+
+SectionVerb
+	Name "HiFi Lowlatency RecBT SCO Tx"
+
+	EnableSequence
+		'MultiMedia5 Mixer AUX_PCM_TX':1:1
+	EndSequence
+
+	DisableSequence
+		'MultiMedia5 Mixer AUX_PCM_TX':1:0
+	EndSequence
+	CapturePCM  40
+	PlaybackPCM  40
+EndSection
+
+SectionVerb
+	Name "HiFi Lowlatency RecBT SCO WB Tx"
+
+	EnableSequence
+		'MultiMedia5 Mixer AUX_PCM_TX':1:1
+	EndSequence
+
+	DisableSequence
+		'MultiMedia5 Mixer AUX_PCM_TX':1:0
+	EndSequence
+	CapturePCM  40
+	PlaybackPCM  40
+EndSection
+
+SectionVerb
+	Name "HiFi Lowlatency RecPROXY Rx"
+
+	EnableSequence
+	EndSequence
+
+	DisableSequence
+	EndSequence
+	CapturePCM  40
+	PlaybackPCM  40
+EndSection
+
+SectionVerb
+	Name "HiFi Lowlatency RecPROXY Tx"
+
+	EnableSequence
+		'MultiMedia5 Mixer AFE_PCM_TX':1:1
+	EndSequence
+
+	DisableSequence
+		'MultiMedia5 Mixer AFE_PCM_TX':1:0
+	EndSequence
+	CapturePCM  40
+	PlaybackPCM  40
 EndSection
 }
 SectionUseCase."HiFi Lowlatency" {
-# Unused by HTC
 SectionVerb
 	Name "HiFi Lowlatency"
 
 	EnableSequence
-		'SLIMBUS_0_RX Audio Mixer MultiMedia5':1:1
+		'MI2S_RX Audio Mixer MultiMedia5':1:1
 	EndSequence
 
 	DisableSequence
-		'SLIMBUS_0_RX Audio Mixer MultiMedia5':1:0
+		'MI2S_RX Audio Mixer MultiMedia5':1:0
 	EndSequence
-	PlaybackPCM 14
-	CapturePCM 14
+	PlaybackPCM 40
+	CapturePCM 40
+EndSection
+
+SectionVerb
+	Name "HiFi LowlatencyHDMI"
+
+	EnableSequence
+		'HDMI Mixer MultiMedia5':1:1
+	EndSequence
+
+	DisableSequence
+		'HDMI Mixer MultiMedia5':1:0
+	EndSequence
+	PlaybackPCM 40
+EndSection
+
+SectionVerb
+	Name "HiFi LowlatencyBT SCO Rx"
+
+	EnableSequence
+		'AUX_PCM_RX Audio Mixer MultiMedia5':1:1
+	EndSequence
+
+	DisableSequence
+		'AUX_PCM_RX Audio Mixer MultiMedia5':1:0
+	EndSequence
+	PlaybackPCM 40
+EndSection
+
+SectionVerb
+	Name "HiFi LowlatencyBT SCO WB Rx"
+
+	EnableSequence
+		'AUX_PCM_RX Audio Mixer MultiMedia5':1:1
+	EndSequence
+
+	DisableSequence
+		'AUX_PCM_RX Audio Mixer MultiMedia5':1:0
+	EndSequence
+	PlaybackPCM 40
+EndSection
+
+SectionVerb
+	Name "HiFi LowlatencyPROXY Rx"
+
+	EnableSequence
+		'AFE_PCM_RX Audio Mixer MultiMedia5':1:1
+	EndSequence
+
+	DisableSequence
+		'AFE_PCM_RX Audio Mixer MultiMedia5':1:0
+	EndSequence
+	PlaybackPCM 40
+EndSection
+
+SectionVerb
+	Name "HiFi LowlatencyPROXY Tx"
+
+	EnableSequence
+	EndSequence
+
+	DisableSequence
+	EndSequence
+	PlaybackPCM 40
 EndSection
 }
 SectionDevice
@@ -931,11 +1060,11 @@ SectionDevice
 		'LINEOUT2 Volume':1:66
 		'LINEOUT3 Volume':1:66
 		'LINEOUT4 Volume':1:66
-		'RCV AMP EN':1:1
+		'RCV AMP EN Switch':1:1
 	EndSequence
 
 	DisableSequence
-		'RCV AMP EN':1:0
+		'RCV AMP EN Switch':1:0
 		'RX3 MIX1 INP1':0:ZERO
 		'RX3 MIX1 INP2':0:ZERO
 		'RX5 MIX1 INP1':0:ZERO
@@ -975,11 +1104,11 @@ SectionDevice
 		'LINEOUT2 Volume':1:66
 		'LINEOUT3 Volume':1:66
 		'LINEOUT4 Volume':1:66
-		'RCV AMP EN':1:1
+		'RCV AMP EN Switch':1:1
 	EndSequence
 
 	DisableSequence
-		'RCV AMP EN':1:0
+		'RCV AMP EN Switch':1:0
 		'SLIM TX3 MUX':0:ZERO
 		'RX3 MIX1 INP1':0:ZERO
 		'RX3 MIX1 INP2':0:ZERO
@@ -1019,11 +1148,11 @@ SectionDevice
 		'LINEOUT2 Volume':1:66
 		'LINEOUT3 Volume':1:66
 		'LINEOUT4 Volume':1:66
-		'RCV AMP EN':1:1
+		'RCV AMP EN Switch':1:1
 	EndSequence
 
 	DisableSequence
-		'RCV AMP EN':1:0
+		'RCV AMP EN Switch':1:0
 		'RX3 MIX1 INP1':0:ZERO
 		'RX3 MIX1 INP2':0:ZERO
 		'RX5 MIX1 INP1':0:ZERO
@@ -2454,7 +2583,7 @@ SectionModifier
 	Name "Play VoiceBT SCO WB Tx"
 
 	EnableSequence
-		'Internal BTSCO SampleRate':0:8000
+		'Internal BTSCO SampleRate':0:16000
 		'Voice Stub Tx Mixer AUX_PCM_UL_TX':1:1
 		'SLIMBUS_1_RX Mixer Voice Stub':1:1
 		'Voice Stub Tx Mixer SLIM_1_TX':1:1
@@ -2578,7 +2707,7 @@ SectionModifier
 	EndSequence
 
 	DisableSequence
-		'Internal BTSCO SampleRate':0:8000
+		'Internal BTSCO SampleRate':0:16000
 		'AUX_PCM_RX_Voice Mixer Voip':1:0
 		'Voip_Tx Mixer AUX_PCM_TX_Voip':1:0
 	EndSequence
@@ -2803,6 +2932,20 @@ SectionModifier
 	PlaybackPCM  36
 EndSection
 
+SectionModifier
+	Name "Play TunnelPROXY Rx"
+
+	EnableSequence
+		'AFE_PCM_RX Audio Mixer MultiMedia4':1:1
+	EndSequence
+
+	DisableSequence
+		'AFE_PCM_RX Audio Mixer MultiMedia4':1:0
+	EndSequence
+	CapturePCM  0
+	PlaybackPCM  36
+EndSection
+
 # HTC additional modifiers
 SectionModifier
 	Name "Play TunnelSpeaker"
@@ -2815,6 +2958,126 @@ SectionModifier
 		'MI2S_RX Audio Mixer MultiMedia4':1:0
 	EndSequence
 	PlaybackPCM  36
+EndSection
+
+SectionModifier
+	Name "Play Lowlatency Music"
+
+	EnableSequence
+		'MI2S_RX Audio Mixer MultiMedia5':1:1
+	EndSequence
+
+	DisableSequence
+		'MI2S_RX Audio Mixer MultiMedia5':1:0
+	EndSequence
+	PlaybackPCM 40
+EndSection
+
+SectionModifier
+	Name "Play Lowlatency MusicBT SCO Rx"
+
+	EnableSequence
+		'AUX_PCM_RX Audio Mixer MultiMedia5':1:1
+	EndSequence
+
+	DisableSequence
+		'AUX_PCM_RX Audio Mixer MultiMedia5':1:0
+	EndSequence
+	PlaybackPCM 40
+EndSection
+
+SectionModifier
+	Name "Play Lowlatency MusicBT SCO WB Rx"
+
+	EnableSequence
+		'AUX_PCM_RX Audio Mixer MultiMedia5':1:1
+	EndSequence
+
+	DisableSequence
+		'AUX_PCM_RX Audio Mixer MultiMedia5':1:0
+	EndSequence
+	PlaybackPCM 40
+EndSection
+
+SectionModifier
+	Name "Play Lowlatency MusicPROXY Rx"
+
+	EnableSequence
+		'AFE_PCM_RX Audio Mixer MultiMedia5':1:1
+	EndSequence
+
+	DisableSequence
+		'AFE_PCM_RX Audio Mixer MultiMedia5':1:0
+	EndSequence
+	PlaybackPCM 40
+EndSection
+
+SectionModifier
+	Name "Capture Lowlatency Music"
+
+	EnableSequence
+		'MultiMedia5 Mixer SLIM_0_TX':1:1
+	EndSequence
+
+	DisableSequence
+		'MultiMedia5 Mixer SLIM_0_TX':1:0
+	EndSequence
+	PlaybackPCM 40
+	CapturePCM 40
+EndSection
+
+SectionModifier
+	Name "Capture Lowlatency MusicBT SCO Tx"
+
+	EnableSequence
+		'MultiMedia5 Mixer AUX_PCM_TX':1:1
+	EndSequence
+
+	DisableSequence
+		'MultiMedia5 Mixer AUX_PCM_TX':1:0
+	EndSequence
+	PlaybackPCM 40
+	CapturePCM 40
+EndSection
+
+SectionModifier
+	Name "Capture Lowlatency MusicBT SCO WB Tx"
+
+	EnableSequence
+		'MultiMedia5 Mixer AUX_PCM_TX':1:1
+	EndSequence
+
+	DisableSequence
+		'MultiMedia5 Mixer AUX_PCM_TX':1:0
+	EndSequence
+	PlaybackPCM 40
+	CapturePCM 40
+EndSection
+
+SectionModifier
+	Name "Capture Lowlatency MusicPROXY Rx"
+
+	EnableSequence
+	EndSequence
+
+	DisableSequence
+	EndSequence
+	PlaybackPCM 40
+	CapturePCM 40
+EndSection
+
+SectionModifier
+	Name "Capture Lowlatency MusicPROXY Tx"
+
+	EnableSequence
+		'MultiMedia5 Mixer AFE_PCM_TX':1:1
+	EndSequence
+
+	DisableSequence
+		'MultiMedia5 Mixer AFE_PCM_TX':1:0
+	EndSequence
+	PlaybackPCM 40
+	CapturePCM 40
 EndSection
 
 SectionModifier

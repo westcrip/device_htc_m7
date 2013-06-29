@@ -155,11 +155,19 @@ on init
     chmod 0660 /sys/class/htc_g_sensor/g_sensor/enable_cir_interrupt
     chmod 0660 /sys/class/bma250/bma250/enable
 
-
-
-    # P-sensor
+    # Proximity sensor
     chown radio radio /sys/class/optical_sensors/proximity/PhoneApp_status
     chmod 0660 /sys/class/optical_sensors/proximity/PhoneApp_status
+
+    chown radio radio /sys/devices/virtual/optical_sensors/proximity/ps_adc
+    chmod 0660 /sys/devices/virtual/optical_sensors/proximity/ps_adc
+    chown radio radio /sys/devices/virtual/optical_sensors/proximity/ps_canc
+    chmod 0660 /sys/devices/virtual/optical_sensors/proximity/ps_canc
+    chown system radio /sys/devices/virtual/optical_sensors/proximity/ps_kadc
+    chmod 0660 /sys/devices/virtual/optical_sensors/proximity/ps_kadc
+
+    # Proximity calibration values
+    write /sys/devices/virtual/optical_sensors/proximity/ps_kadc "0x0 0xFFFF3C2D"
 
     # htc_cir
     chown irda irda /sys/class/htc_cir/cir/reset_cir
@@ -202,7 +210,7 @@ on fs
     mkdir /firmware/mdm 0771 system system
     mkdir /firmware/q6 0771 system system
 
-    mount_all ./fstab.target
+    mount_all ./fstab.qcom
 
     insmod /system/lib/modules/dm-crypt.ko
 
@@ -230,7 +238,7 @@ on fs
     exec /system/bin/sh /init.qcom.firmware_links.sh /firmware/mdm/image /vendor/firmware "*.mbn *.img"
     exec /system/bin/sh /init.qcom.firmware_links.sh /firmware/q6 /vendor/firmware "q6.*"
 
-    mount_all ./remount.target
+    mount_all ./remount.qcom
 
 on post-fs-data
     mkdir /data/radio 0770 radio radio
@@ -259,6 +267,9 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
 on boot
+    # mount debugfs for systrace
+    mount debugfs /sys/kernel/debug /sys/kernel/debug
+
     # We will remap this as /mnt/sdcard with the sdcard fuse tool
     mkdir /data/media 0775 media_rw media_rw
     chown media_rw media_rw /data/media
@@ -434,11 +445,6 @@ on boot
     write /proc/sys/net/core/rmem_max  1220608
     write /proc/sys/net/core/wmem_max  1220608
 
-service adaptive /system/bin/adaptive -c 0 -s 150 -b 210
-    class main
-    user root
-    disabled
-
 # Compass/accelerometer daemon
 service akmd /system/bin/akmd
     class main
@@ -509,10 +515,6 @@ service thermald /system/bin/thermald
     user root
     group root
     disabled
-
-service tpd /sbin/tpd
-    class core
-    user root
 
 # wifi ++
 service p2p_supplicant /system/bin/wpa_supplicant \
